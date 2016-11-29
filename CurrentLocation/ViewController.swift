@@ -39,7 +39,14 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         let span = MKCoordinateSpanMake(0.01, 0.01)
         let region = MKCoordinateRegionMake(center, span)
         
+        let annotation = MKPointAnnotation()
+        annotation.coordinate = center
+        annotation.title = "My Current Location"
+//        annotation.subtitle = ":-D"
+        
+        mapView.addAnnotation(annotation)
         mapView.setRegion(region, animated: true)
+        locationMgr.stopUpdatingLocation()
     }
 
 }
