@@ -7,12 +7,19 @@
 //
 
 import UIKit
+import MapKit
+import CoreLocation
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
 
+    @IBOutlet var mapView: MKMapView!
+    
+    let locationMgr = CLLocationManager()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        locationMgr.delegate = self
     }
 
     override func didReceiveMemoryWarning() {
@@ -20,6 +27,11 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
+    @IBAction func getLocation(_ sender: UIButton) {
+        locationMgr.requestWhenInUseAuthorization()
+        locationMgr.desiredAccuracy = kCLLocationAccuracyBest
+        locationMgr.startUpdatingLocation()
+    }
 
 }
 
