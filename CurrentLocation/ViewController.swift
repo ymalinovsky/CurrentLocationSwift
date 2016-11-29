@@ -32,6 +32,15 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         locationMgr.desiredAccuracy = kCLLocationAccuracyBest
         locationMgr.startUpdatingLocation()
     }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        let location: CLLocation = locations.last!
+        let center = CLLocationCoordinate2DMake(location.coordinate.latitude, location.coordinate.longitude)
+        let span = MKCoordinateSpanMake(0.01, 0.01)
+        let region = MKCoordinateRegionMake(center, span)
+        
+        mapView.setRegion(region, animated: true)
+    }
 
 }
 
